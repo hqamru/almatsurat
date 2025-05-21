@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al-Ma'tsurat dan Doa Pilihan</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff;
+    }
+
+    .slider {
+      display: flex;
+      width: 400vw;
+      height: 100vh;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .slide {
+      flex: 0 0 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .slide h1 {
+      font-size: 6vw;
+      margin: 0;
+    }
+
+    .arabic {
+      font-family: 'Scheherazade New', 'Amiri', 'Traditional Arabic', serif;
+      font-size: 9vw;
+      direction: rtl;
+      margin-bottom: 15px;
+    }
+
+    .translation {
+      font-size: 14pt;
+      direction: ltr;
+      max-width: 90%;
+      color: #333;
+    }
+
+    .slide:nth-child(1) { background-color: #fde2e4; color: #6a1b9a; }
+    .slide:nth-child(2) { background-color: #d0f4de; color: #004d40; }
+    .slide:nth-child(3) { background-color: #fff1e6; color: #bf360c; }
+    .slide:nth-child(4) { background-color: #e0f7fa; color: #006064; }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+      padding: 0 15px;
+      box-sizing: border-box;
+      pointer-events: none;
+    }
+
+    .nav-buttons button {
+      pointer-events: all;
+      background: rgba(0,0,0,0.2);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: background 0.3s;
+    }
+
+    .nav-buttons button:hover {
+      background: rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .slide h1 {
+        font-size: 9vw;
+      }
+
+      .arabic {
+        font-size: 13vw;
+      }
+
+      .translation {
+        font-size: 13pt;
+      }
+
+      .nav-buttons button {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slider" id="slider">
+    <!-- Slide 1 -->
+    <div class="slide">
+      <h1>Al-Ma'tsurat dan Doa Pilihan</h1>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide">
+      <div class="arabic">أَعُوْذُ بِاللّٰهِ السَّمِيْعِ الْعَلِيْمِ مِنَ الشَّيْطَانِ الرَّجِيْمِ</div>
+      <div class="translation">Aku berlindung kepada Allah Yang Maha Mendengar lagi Maha Mengetahui dari godaan setan yang terkutuk.</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide">
+      <div class="arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+      <div class="translation">Dengan nama Allah Yang Maha Pengasih, Maha Penyayang.</div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide">
+      <div class="arabic">بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ</div>
+      <div class="arabic">الْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَ</div>
+      <div class="arabic">الرَّحْمٰنِ الرَّحِيْمِ</div>
+      <div class="arabic">مٰلِكِ يَوْمِ الدِّيْنِ</div>
+      <div class="arabic">اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُ</div>
+      <div class="arabic">اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَ</div>
+      <div class="arabic">صِرَاطَ الَّذِيْنَ أَنْعَمْتَ عَلَيْهِمْ</div>
+      <div class="arabic">غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّآلِّيْنَ</div>
+      <div class="translation" style="margin-top: 20px;">
+        Dengan nama Allah Yang Maha Pengasih, Maha Penyayang. Segala puji bagi Allah, Tuhan seluruh alam. Yang Maha Pengasih, Maha Penyayang. Pemilik hari pembalasan. Hanya kepada-Mu kami menyembah dan hanya kepada-Mu kami mohon pertolongan. Tunjukilah kami jalan yang lurus, (yaitu) jalan orang-orang yang telah Engkau beri nikmat, bukan jalan mereka yang dimurkai dan bukan pula jalan mereka yang sesat.
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <button id="prevBtn">❮</button>
+    <button id="nextBtn">❯</button>
+  </div>
+
+  <script>
+    let slider = document.getElementById("slider");
+    let currentSlide = 0;
+    const totalSlides = 4;
+
+    function updateSlide() {
+      slider.style.transform = `translateX(-${currentSlide * 100}vw)`;
+    }
+
+    document.getElementById("nextBtn").onclick = () => {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    };
+
+    document.getElementById("prevBtn").onclick = () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    };
+
+    // Swipe support
+    let startX = 0;
+    slider.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+
+    slider.addEventListener("touchend", e => {
+      let endX = e.changedTouches[0].clientX;
+      if (startX - endX > 50 && currentSlide < totalSlides - 1) {
+        currentSlide++;
+      } else if (endX - startX > 50 && currentSlide > 0) {
+        currentSlide--;
+      }
+      updateSlide();
+    });
+  </script>
+
+</body>
+</html>
